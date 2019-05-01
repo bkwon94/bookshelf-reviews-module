@@ -7,7 +7,7 @@ import RatingDetails from './components/RatingDetails.jsx';
 import Filter from './components/Filter.jsx'
 import AddReview from './components/AddReview.jsx'
 import style from './sample.less';
-
+// hi
 class App extends React.Component {
   constructor(props) {
     super(props);
