@@ -8,12 +8,12 @@ const pg = require('../db/postgreSQL/index.js');
 
 const app = express();
 
-
-// app.get('*.gz', (req, res, next) => {
-//   res.set('Content-Encoding', 'gzip');
-//   res.set('Content-Type', 'text/javascript');
-//   next();
-//  });
+// BUNDLE COMPRESSION FOR EC2 INSTANCE OPTIMIZATION
+app.get('*.gz', (req, res, next) => {
+  res.set('Content-Encoding', 'gzip');
+  res.set('Content-Type', 'text/javascript');
+  next();
+ });
 
 
 app.use(cors());
@@ -90,5 +90,10 @@ app.delete('/books/:id/reviews', async (req, res) => {
   }
 });
 
+// LOADER APPROVAL
+app.get('/loaderio-02d08b70ea4b92a400442c2498e498af', (req, res) => {
+  res.send('loaderio-02d08b70ea4b92a400442c2498e498af');
+  res.end();
+});
 
 module.exports = app;
