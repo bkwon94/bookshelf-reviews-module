@@ -8,6 +8,14 @@ const pg = require('../db/postgreSQL/index.js');
 
 const app = express();
 
+
+// app.get('*.gz', (req, res, next) => {
+//   res.set('Content-Encoding', 'gzip');
+//   res.set('Content-Type', 'text/javascript');
+//   next();
+//  });
+
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

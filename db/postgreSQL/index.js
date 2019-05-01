@@ -25,7 +25,6 @@ const getRatedReviews = async(id, rating) => {
       .from('reviews')
       .where({ book_id: id })
       .andWhere({ rating: rating });
-    console.log(ratedReviews);
     return ratedReviews;
   }
   catch(err) {
@@ -39,7 +38,6 @@ const getUser = async(userId) => {
     let user = await knex.select('username')
       .from('users')
       .where({ user_id: userId });
-    console.log(user);
     return user;
   }
   catch(err) {
@@ -50,12 +48,9 @@ const getUser = async(userId) => {
 // maybe refactor so that after reviews loaded, get users by that id
 const getAllUsers = async(id) => {
   try {
-    console.time('get all users time');
     let users = await knex.select()
       .from('users')
       .where({ user_id: id });
-    await console.timeEnd('get all users time');
-    await console.log(users[0]);
     return users[0];
   }
   catch(err) {
@@ -88,7 +83,6 @@ const addLike = async(reviewId) => {
     await knex('reviews')
       .where('id', '=', reviewId)
       .increment('likes', 1)
-    await console.log('Updated likes');
   }
   catch(err) {
     throw err;
