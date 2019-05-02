@@ -3,8 +3,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
-// const db = require('../db');
 const pg = require('../db/postgreSQL/index.js');
+const cache = require('express-redis-cache')();
+
 
 const app = express();
 
@@ -15,16 +16,27 @@ app.get('*.gz', (req, res, next) => {
   next();
  });
 
-
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/books/:id', express.static(path.join(__dirname, '/../public')));
 
-// get and post routes to interact with database here
+
 
 // get all reviews for specific book id
-app.get('/books/:id/reviews', async (req, res) => {
+// app.get('/books/:id/reviews', async (req, res) => {
+//   const { id } = req.params;
+//   try {
+//     const reviews = await pg.getReviews(id);
+//     console.log(reviews);
+//     res.json(reviews);
+//   } catch (err) {
+//     res.json(err);
+//   }
+// });
+
+// WITH REDIS CACHE
+app.get('/books/:id/reviews', cache.route(), async (req, res) => {
   const { id } = req.params;
   try {
     const reviews = await pg.getReviews(id);
