@@ -19,8 +19,7 @@ app.get('*.gz', (req, res, next) => {
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use('/books/:id', express.static(path.join(__dirname, '/../public')));
-
+app.use('/books/:id', cache.route(), express.static(path.join(__dirname, '/../public')));
 
 
 // get all reviews for specific book id
@@ -74,8 +73,8 @@ app.post('/books/:id/reviews', async (req, res) => {
   const { id } = req.params;
   const { rating, review, user_id } = req.body;
   try {
-    const posted = await pg.postReview(review, rating, id, user_id);
-    res.json(posted);
+    await pg.postReview(review, rating, id, user_id);
+    await res.end();
   } catch (err) {
     console.log(err);
   }
