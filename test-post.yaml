@@ -1,3 +1,32 @@
+# config:
+#   target: http://localhost:3003
+#   phases:
+#     - duration: 30
+#       arrivalRate: 1
+#       rampTo: 10
+#       name: 'Warm up'
+#     - duration: 30
+#       arrivalRate: 10
+#       rampTo: 100
+#       name: 'Moderate stress'
+#     - duration: 30
+#       arrivalRate: 100
+#       rampTo: 500
+#       name: 'Significant stress'
+#     - duration: 30
+#       arrivalRate: 500
+#       rampTo: 700
+#       name: 'Max stress'
+# scenarios:
+#   - flow:
+#     - post:
+#         url: "/books/3/reviews"
+#         json:
+#           user_id: 10
+#           review: "Sample review"
+#           rating: 4
+
+
 config:
   target: http://localhost:3003
   phases:
@@ -5,25 +34,11 @@ config:
       arrivalRate: 1
       rampTo: 10
       name: 'Warm up'
-    - duration: 30
-      arrivalRate: 10
-      rampTo: 100
-      name: 'Moderate stress'
-    - duration: 30
-      arrivalRate: 100
-      rampTo: 500
-      name: 'Significant stress'
-    - duration: 30
-      arrivalRate: 500
-      rampTo: 700
-      name: 'Max stress'
 scenarios:
   - flow:
     - post:
-        url: "/books/3/reviews"
+        url: "/books/5/reviews"
         json:
-          user_id: 10
+          user_id: 11
           review: "Sample review"
           rating: 4
-
-
